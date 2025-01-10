@@ -1,7 +1,7 @@
 import pandas as pd
 #import numpy as np
 import streamlit as st
-import plotly.express
+import plotly.express as px
 
 st.set_page_config(layout="wide", page_title="India Census 2011 Data Visualization",page_icon="📊")
 
@@ -19,12 +19,12 @@ if plot:
     st.text("Size Represent Primary Parameter")
     st.text("Color Represent Secondary Parameter")
     if selected_state == 'Overall India':
-        fig=plotly.express.scatter_mapbox(df, lat="Latitude", lon="Longitude", size=primary, color=secondary, zoom=4, size_max=35,
+        fig=px.scatter_mapbox(df, lat="Latitude", lon="Longitude", size=primary, color=secondary, zoom=4, size_max=35,
                                           hover_name="District", mapbox_style='carto-positron', width=1200, height=700)
         st.plotly_chart(fig,use_container_width=True)
     else:
         state_df = df[df['State'] == selected_state]
-        fig = plotly.express.scatter_mapbox(state_df, lat="Latitude", lon="Longitude", size=primary, color=secondary, zoom=6, size_max=35,
+        fig = px.scatter_mapbox(state_df, lat="Latitude", lon="Longitude", size=primary, color=secondary, zoom=6, size_max=35,
                                             hover_name="District", mapbox_style='carto-positron', width=1200, height=700)
         st.plotly_chart(fig,use_container_width=True)
 
